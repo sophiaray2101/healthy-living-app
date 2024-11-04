@@ -25,5 +25,25 @@ router.get('/:category_id/questions', async (req, res) => {
     }
 });
 
+// POST (insert questions into category)
+router.post('/:category_id/questions', async (req, res) => {
+    try{
+        const {category_id} = req.params;
+        const {content} = req.body
+        const data = await connection.promise().query(
+            `insert into questions (category_id, content) values (?,?)`, [category_id, content]
+        );
+        res.status(201).json({ 
+            message: "Successfully inserted question into category",
+            questions: data
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: err || "Error adding question"
+        });
+    }
+});
+
+
 
 export default router;

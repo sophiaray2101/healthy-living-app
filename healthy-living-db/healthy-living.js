@@ -1,8 +1,6 @@
 import express from 'express'
 import mysql from 'mysql2'
 
-const router = express.Router()
-
 const connection = mysql.createPool({
     host: 'localhost',
     user: 'root',
@@ -10,4 +8,4 @@ const connection = mysql.createPool({
     database: 'healthy_living'
 })
 
-export default router;
+export default connection;

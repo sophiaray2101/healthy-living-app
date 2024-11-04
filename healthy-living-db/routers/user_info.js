@@ -15,7 +15,7 @@ router.post("/register", async (req, res) => {
         const passwordHash = await bcrypt.hash(password, saltRounds);
         
         const data = await connection.promise().query(
-            `INSERT INTO user_info (username, password) VALUES (?, ?)`, [username, password]
+            `INSERT INTO user_info (username, password) VALUES (?, ?)`, [username, passwordHash]
         );
         res.status(201).json({
             message: "Successfully registered user",
@@ -24,6 +24,7 @@ router.post("/register", async (req, res) => {
         });
 
     } catch (err) {
+        console.log("Error occured during registration:", err)
         res.status(500).json({
             message: err || "Error occured while registering user"
         });
@@ -33,9 +34,9 @@ router.post("/register", async (req, res) => {
 // POST -> log in user verification
 router.post("/login", async (req, res) => {
     try{
-        const {username, password} = req.body();
+        const {username, password} = req.body;
 
-        const data = await connection.promise().query(
+        const [data] = await connection.promise().query(
             `SELECT * FROM user_info WHERE username = ?`, [username]
         );
 
@@ -48,7 +49,7 @@ router.post("/login", async (req, res) => {
 
         const user = data[0];
 
-        const matched = await bcrypt.compare(password, user.passwordHash);
+        const matched = await bcrypt.compare(password, user.password);
 
         if (!matched){
             return res.status(401).json({
@@ -62,6 +63,7 @@ router.post("/login", async (req, res) => {
         })
 
     } catch (err) {
+        console.log("Error occured during login:", err)
         res.status(500).json({
             message: err || "Error occured while logging in"
         });
