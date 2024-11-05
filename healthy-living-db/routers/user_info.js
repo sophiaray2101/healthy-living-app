@@ -4,7 +4,36 @@ import connection from '../healthy-living.js';
 
 const router = express.Router();
 
-// Only need POST to create new user and POST to log in user (not a GET for more security reasons)
+// POST -> check if username already exists
+router.post("/check_username", async (req, res) => {
+    try{ 
+        const {username, password} = req.body;
+
+        const [data] = await connection.promise().query(
+            `SELECT * FROM user_info WHERE username = ?`, [username]
+        );
+
+        // checking if user even exsists
+        if (data.length === 0){
+            return res.status(200).json({
+                message: "Username not already in use"
+            });
+        }
+        else{
+            return res.status(409).json({
+                message: "Username already in use"
+            });
+        }
+
+    } catch (err) {
+        console.log("Error occured during checking username:", err)
+        res.status(500).json({
+            message: err || "Error occured while checking username"
+        });
+    }
+});
+
+
 
 // POST -> create new user
 router.post("/register", async (req, res) => {
