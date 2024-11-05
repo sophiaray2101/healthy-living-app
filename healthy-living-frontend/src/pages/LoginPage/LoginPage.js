@@ -1,6 +1,7 @@
 import React from 'react';
 import {useState, useRef} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
+import { useUser } from '../../UserContext.js';
 
 import './LoginPage.js';
 
@@ -8,6 +9,7 @@ function LoginPage(){
     const [errorMessage, errorMessageSetter] = useState('');
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
+    const {setUsername} = useUser();
     const navigate = useNavigate();
 
     const handleLogin = (e) => {
@@ -38,6 +40,7 @@ function LoginPage(){
           })
           .then(json => {
             errorMessageSetter(''); // clear any old error message
+            setUsername(user.username)
             navigate('/home');
           })
           .catch(err => {
