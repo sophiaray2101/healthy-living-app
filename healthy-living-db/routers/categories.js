@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
     try{
-        const data = await connection.promise().query(
+        const [data] = await connection.promise().query(
             `SELECT * FROM categories;`
         );
         res.status(200).json({ // 200 -> indicates sucessfull request

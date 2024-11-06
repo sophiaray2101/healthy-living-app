@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useRef } from "react";
 import {useNavigate} from 'react-router-dom';
 
+import './RegisterPage.css'
+
 function RegisterPage(){
     const [userErrorMessage, userErrorMessageSetter] = useState('');
     const [pwordErrorMessage, pwordErrorMessageSetter] = useState('');
@@ -126,62 +128,65 @@ function RegisterPage(){
         }
     }
 
-    return(
-        <div>
-            <h2 className='register-title'> Fill Out Information Below to Create an Account</h2>
-            <form className='register-form' onSubmit={handleRegister}>
-                <div className="register-form-row" id="input-form-row">
-                    <label>
-                        Username:
+    return (
+        <div className="register-container">
+            <div className="register-wrapper">
+                <h2 className="register-title">Fill Out Information Below to Create an Account</h2>
+                <form className="register-form" onSubmit={handleRegister}>
+                    <div className="register-form-row">
+                        <label>
+                            Username:
+                            <input 
+                            type="text" 
+                            name="username"
+                            ref={usernameRef} />
+                        </label>
+                        {userErrorMessage && (
+                        <div className="error-message">{userErrorMessage}</div>
+                        )}
+                    </div>
+                    <div className="register-form-row">
+                        <label>
+                            Password:
+                            <input 
+                            type="password" 
+                            name="password"
+                            ref={passwordRef} />
+                        </label>
+                        {pwordErrorMessage && ( 
+                        <div className="error-message">{pwordErrorMessage}</div>
+                        )}
+                    </div>
+                    <div className="register-form-row">
+                        <label>
+                            Repeat password:
+                            <input 
+                            type="password" 
+                            name="repeat-password"
+                            ref={repeatPasswordRef} />
+                        </label>
+                        {rePwordErrorMessage && ( 
+                        <div className="error-message">{rePwordErrorMessage}</div>
+                        )}
+                    </div>
+                    <div className="register-form-row">
                         <input 
-                        type="text" 
-                        name="username"
-                        ref={usernameRef} />
-                    </label>
-                    {userErrorMessage && ( // only renders error message if it exists
-                    <div className='error-message'>{userErrorMessage}</div>
-                    )}
-                </div>
-                <div className="register-form-row" id="input-form-row">
-                    <label>
-                        Password:
-                        <input 
-                        type="text" 
-                        name="password"
-                        ref={passwordRef} />
-                    </label>
-                    {pwordErrorMessage && ( 
-                    <div className='error-message'>{pwordErrorMessage}</div>
-                    )}
-                </div>
-                <div className="register-form-row" id="input-form-row">
-                    <label>
-                        Repeat password:
-                        <input 
-                        type="text" 
-                        name="password"
-                        ref={repeatPasswordRef} />
-                    </label>
-                    {rePwordErrorMessage && ( 
-                    <div className='error-message'>{rePwordErrorMessage}</div>
-                    )}
-                </div>
-                <div className="register-form-row">
-                    <input 
-                        type="checkbox" 
-                        id="checkbox-register-form"
-                        required />
-                    <div className="checkbox-register-form-text">I agree to Terms and Conditions and Privacy Policy</div>
-                </div>
-                <div className="register-form-row">
-                    <button type="submit">Register</button>
-                </div>
-            </form>
-            {successMessage && ( 
-                    <div className='success-message'>{successMessage}</div>
-            )}
+                            type="checkbox" 
+                            id="checkbox-register-form"
+                            required />
+                        <div className="checkbox-register-form-text">I agree to Terms and Conditions and Privacy Policy</div>
+                    </div>
+                    <div className="register-form-row">
+                        <button type="submit">Register</button>
+                    </div>
+                </form>
+                {successMessage && (
+                        <div className="success-message">{successMessage}</div>
+                )}
+            </div>
         </div>
-    )
+    );
+    
 
 }
 

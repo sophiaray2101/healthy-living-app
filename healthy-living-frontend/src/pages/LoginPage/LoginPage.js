@@ -3,7 +3,7 @@ import {useState, useRef} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import { useUser } from '../../UserContext.js';
 
-import './LoginPage.js';
+import './LoginPage.css';
 
 function LoginPage(){
     const [errorMessage, errorMessageSetter] = useState('');
@@ -41,6 +41,7 @@ function LoginPage(){
           .then(json => {
             errorMessageSetter(''); // clear any old error message
             setUsername(user.username)
+            localStorage.setItem('username',user.username);
             navigate('/home');
           })
           .catch(err => {
@@ -50,10 +51,11 @@ function LoginPage(){
     }
 
     return (
-        <div>
-            <h2 className='login-title'> Log In Below to Access Application</h2>
-            <form className='login-form' onSubmit={handleLogin}>
-                <div className="login-form-row" id="input-form-row">
+        <div className="login-container">
+        <div className="login-wrapper">
+            <h2 className="login-title">Log In Below to Access Application</h2>
+            <form className="login-form" onSubmit={handleLogin}>
+                <div className="login-form-row">
                     <label>
                         Username:
                         <input 
@@ -62,11 +64,11 @@ function LoginPage(){
                         ref={usernameRef} />
                     </label>
                 </div>
-                <div className="login-form-row" id="input-form-row">
+                <div className="login-form-row">
                     <label>
                         Password:
                         <input 
-                        type="text" 
+                        type="password" 
                         name="password"
                         ref={passwordRef} />
                     </label>
@@ -76,13 +78,13 @@ function LoginPage(){
                 </div>
             </form>
 
-            {errorMessage && ( // only renders error message if it exists
-                <div className='error-message'>{errorMessage}</div>
-
+            {errorMessage && (
+                <div className="error-message">{errorMessage}</div>
             )}
 
-            <div id='register-link'> Dont have an account? <Link to="/register">Create Account Here</Link></div>
+            <div id="register-link">Don’t have an account? <Link to="/register">Create Account Here</Link></div>
         </div>
+    </div>
     )
 
 }

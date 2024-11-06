@@ -10,9 +10,10 @@ const router = express.Router();
 router.get('/:category_id/questions', async (req, res) => {
     try{
         const {category_id} = req.params;
-        const data = await connection.promise().query(
-            `SELECT question_id, content FROM questions WHERE category_id=?`, [category_id]
+        const [data] = await connection.promise().query(
+            `SELECT question_id, content, answer FROM questions WHERE category_id=?`, [category_id]
         );
+        console.log("question data", data)
         res.status(200).json({ // 200 -> indicates sucessfull request
             message: "Successfully grabbed questions for category",
             questions: data
@@ -29,9 +30,9 @@ router.get('/:category_id/questions', async (req, res) => {
 router.post('/:category_id/questions', async (req, res) => {
     try{
         const {category_id} = req.params;
-        const {content} = req.body
-        const data = await connection.promise().query(
-            `insert into questions (category_id, content) values (?,?)`, [category_id, content]
+        const {content, answer} = req.body
+        const [data] = await connection.promise().query(
+            `insert into questions (category_id, content, answer) values (?,?,?)`, [category_id, content, answer]
         );
         res.status(201).json({ 
             message: "Successfully inserted question into category",

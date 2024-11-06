@@ -1,0 +1,11 @@
+.question-answer-container h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #2e3440;
+}
+
+.question-answer-list {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    color: #4c566a;
+}

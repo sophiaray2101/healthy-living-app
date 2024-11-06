@@ -1,18 +1,24 @@
 import React from "react";
 import { useUser } from "../../UserContext";
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import './Navbar.css';
 
 function Navbar() {
+    const navigate = useNavigate();
+    const {username, setUsername} = useUser();
 
-    const {username} = useUser();
+    const handleLogout = () => {
+      setUsername(null);
+      localStorage.removeItem('username');
+      navigate("/");
+    }
 
     return (
         <header className="page-header">
-            <h3 class="page-title">Healthy Living FAQs</h3>
-            <ul class="nav-bar">
-              <li class="nav-bar-item">Welcome, {username}<Link to="/">Log Out</Link></li>
+            <h3 className="page-title">Healthy Living FAQs</h3>
+            <ul className="nav-bar">
+              <li className="nav-bar-item">Welcome, {username}<button onClick={handleLogout}>Log Out</button></li>
             </ul>
           </header>
       )
