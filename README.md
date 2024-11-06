@@ -44,8 +44,6 @@ Healthy Living FAQs is a web application that helps users access frequently aske
 
 ---
 
----
-
 ## API Endpoints
 
 ### Users
