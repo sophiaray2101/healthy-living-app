@@ -6,7 +6,7 @@
 
 ## Overview
 
-Healthy Living FAQs is a web application that helps users access frequently asked questions about healthy living. Users can log in to browse various categories and find answers to questions related to health and wellness. Built with React for the front-end and a RESTful API for data handling, this app provides a responsive, user-friendly experience.
+Healthy Living FAQs is a web application that helps users access frequently asked questions about healthy living. Users can log in to browse various categories and find answers to questions related to health and wellness. Built with React for the front-end and a RESTful API for data handling, this app provides a responsive, user-friendly experience. Future features to be implemented soon.
 
 ---
 
