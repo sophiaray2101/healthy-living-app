@@ -64,11 +64,11 @@ Healthy Living FAQs is a web application that helps users access frequently aske
 
 ## How to Use
 
-1. Copy repository onto your local machine (`git clone `
-2. Create a new branch for your feature (`git checkout -b feature-name`).
-3. Commit your changes (`git commit -m 'Add new feature'`).
-4. Push to the branch (`git push origin feature-name`).
-5. Open a pull request.
+1. Copy repository onto your local machine (`git clone git@github.com:sophiaray2101/healthy-living-app.git`)
+2. Cd into backend (`cd healthy-living-app-db`).
+3. Start the backend (`npm start`).
+4. Open a new terminal window and cd into the frontend (`cd healthy-living-app-frontend`).
+5. Start the frontend (`npm start`).
 
 ---
 
